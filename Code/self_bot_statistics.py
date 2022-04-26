@@ -7,36 +7,6 @@ client = TelegramClient('mysess', api_id=os.getenv('API_ID'), api_hash= os.geten
 
 
 
-@client.on(events.NewMessage(incoming=True))
-async def respond(event):
-    username = await event.get_sender()
-    # entity = await client.get_entity(username)
-    # print(entity.stringify())
-
-    if 'привет' in str(event.raw_text).lower():
-        x = datetime.now().hour
-        if x > 0 and x < 7:
-            await event.reply(f'Ух, поздно же ты пишешь =) Доброй ночи {username.first_name}. Скорее всего я сейчас сплю, но это не точно.')
-        elif x >=7 and x < 12:
-            await event.reply(f'Доброе утро, {username.first_name} =).')
-        elif x >=12 and x < 18:
-            await event.reply(f'Доброго тебе дня, {username.first_name} =).')
-        else:
-            await event.reply(f'Вечерочка, {username.first_name}!')
-    elif 'здравствуйте' in str(event.raw_text).lower():
-        x = datetime.now().hour
-        if x > 0 and x < 7:
-            await event.reply(f'Ух, поздно же вы пишете, {username.first_name}. Скорее всего я сейчас сплю, но это не точно. Отвечу утром, если не замечу сейчас')
-        elif x >=7 and x < 12:
-            await event.reply(f'Доброе утро, {username.first_name} =).')
-        elif x >=12 and x < 18:
-            await event.reply(f'Добрый день =).')
-        else:
-            await event.reply(f'Добрый вечер!')
-
-
-
-
 @client.on(events.NewMessage(outgoing=True, pattern=r'\.stats'))
 async def pushing(event):
 
